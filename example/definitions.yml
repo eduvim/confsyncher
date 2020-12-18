@@ -1,0 +1,7 @@
+definitions:
+  nvim:
+    path: "/home/edu/.config/nvim/init.vim"
+    template: "init.vim.template"
+  tmux:
+    path: "/home/edu/.tmux.conf"
+    template: "tmux.conf.template"

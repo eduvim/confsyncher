@@ -1,0 +1,43 @@
+call plug#begin('~/.config/.nvim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'junegunn/fzf' , {'dir': '~/.fzf' , 'do': './install -all'}
+Plug 'fatih/vim-go', {'do': 'GoInstallBinaries'}
+
+Plug 'preservim/tagbar'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'ryanoasis/vim-devicons'
+
+" Plug 'Yggdroot/identLine'
+Plug 'ayu-theme/ayu-vim'
+
+call plug#end()
+set t_Co=256
+
+set termguicolors
+set encoding=UTF-8
+set number
+syntax on
+se cursorline
+filetype plugin indent on
+
+map <C-n> :NERDTreeToggle<CR>
+map <C-d> :GoDef<CR>
+map <C-q> :GoDefPop<CR>
+map <C-r> :GoRename<CR>
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+let g:go_auto_sameids = 1
+
+let NERDTreeShowHidden=1
+
+set expandtab
+set shiftwidth=8
+set softtabstop=8
+
+let ayucolor = "mirage"
+colorscheme ayu
