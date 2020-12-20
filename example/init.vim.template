@@ -8,7 +8,7 @@ Plug 'preservim/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 
-" Plug 'Yggdroot/identLine'
+Plug 'dense-analysis/ale'
 Plug 'ayu-theme/ayu-vim'
 
 call plug#end()
@@ -30,9 +30,12 @@ autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
+let g:go_auto_type_info = 0
 let g:go_auto_sameids = 1
 
+let g:go_gpls_enabled = 0
+
+let g:ale_completion_enabled=1
 let NERDTreeShowHidden=1
 
 set expandtab
@@ -40,4 +43,17 @@ set shiftwidth=8
 set softtabstop=8
 
 let ayucolor = "mirage"
+
+let g:ale_linters= { 
+  \ 'go': ['gopls', 'golint'] , 
+  \}
+
+set omnifunc=ale#completion#OmniFunc
 colorscheme ayu
+
+" Load all plugins now.
+" " Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" " Load all of the helptags now, after plugins have been loaded.
+" " All messages and errors will be ignored.
+silent! helptags ALL
