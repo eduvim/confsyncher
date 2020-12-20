@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"io/ioutil"
 	"os"
 	"testing"
@@ -31,5 +32,41 @@ func TestFileNotExists(t *testing.T) {
 	tempDir := os.TempDir()
 	if !FileNotExists(tempDir + pathStr) {
 		t.Fatalf("File was suppoused to exist")
+	}
+}
+
+func TestIsNotNil(t *testing.T) {
+	cases := [...]struct {
+		err      error
+		expected bool
+	}{
+		{
+			err:      nil,
+			expected: false,
+		},
+		{
+			err:      errors.New("foo error"),
+			expected: true,
+		},
+	}
+	for _, val := range cases {
+		if val.expected != IsNotNil(val.err) {
+			t.Fatalf("want %v got %v ", val.expected, val.err)
+		}
+	}
+}
+
+func TestYMLStringToDefinitions(t *testing.T) {
+	scenarios := []struct {
+		data string
+		def  Definition
+	}{
+		{
+			data: "definitions:\n  foo:\n    path: mypath\n    template: fakePath\n",
+			def:  Definition{Definitions: make(map[string]Tool, 1)},
+		},
+	}
+	for _, scenario := range scenarios {
+		YMLStringToDefinitions(scenario.data)
 	}
 }
