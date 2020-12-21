@@ -1,6 +1,7 @@
 package main
 
 import (
+	"errors"
 	"io/ioutil"
 	"log"
 	"os"
@@ -8,6 +9,9 @@ import (
 
 	"gopkg.in/yaml.v2"
 )
+
+// DefinitionFilename is the name of the file expected to contain the definition yml
+const DefinitionFilename = "definitions.yml"
 
 // Definition wraps the complete map of definitions
 type Definition struct {
@@ -30,11 +34,14 @@ func execute() {
 		log.Fatalf("you need to provide the path where your definitions.yml directory")
 	}
 	data := FindAndReadDefinitions(args[1])
-	usersDefs := YMLStringToDefinitions(data)
+	usersDefs, err := YMLStringToDefinitions(data)
+	FailIfError("the definitions file cannot be correctly parsed ", err)
 	for toolName, defs := range usersDefs.Definitions {
 		log.Printf("writing ...  %s \n", toolName)
-		RemovesFileIfExists(defs)
-		CreateSymlinkFromDef(args[1], defs)
+		err := RemovesFileIfExists(defs)
+		FailIfError("the definitions file cannot be correctly parsed ", err)
+		err = CreateSymlinkFromDef(args[1], defs)
+		FailIfError("the definitions file cannot be correctly parsed ", err)
 		log.Printf("tool configured ...  %s \n", toolName)
 	}
 }
@@ -62,8 +69,8 @@ func FindAndReadDefinitions(path string) (data string) {
 		log.Fatalf("cannot open the declared dir %s %+v", path, err)
 	}
 	for _, file := range files {
-		if file.Name() == "definitions.yml" {
-			bytes, err := ioutil.ReadFile(path + "/definitions.yml")
+		if file.Name() == DefinitionFilename {
+			bytes, err := ioutil.ReadFile(path + DefinitionFilename)
 			data = string(bytes)
 			if IsNotNil(err) {
 				log.Fatalf("cannot open declaration file %+v \n", err)
@@ -76,31 +83,30 @@ func FindAndReadDefinitions(path string) (data string) {
 }
 
 // YMLStringToDefinitions binds the string value to a Definitions struct
-func YMLStringToDefinitions(data string) (definition Definition) {
-	err := yaml.Unmarshal([]byte(data), &definition)
-	if IsNotNil(err) {
-		log.Fatalf("error: %v", err)
-	}
+func YMLStringToDefinitions(data string) (definition Definition, err error) {
+	err = yaml.Unmarshal([]byte(data), &definition)
 	return
 }
 
 // CreateSymlinkFromDef create a symlink to the old path and the definided path
-func CreateSymlinkFromDef(path string, defs Tool) {
-	log.Printf("path: %s template: %s", defs.Path, defs.Template)
-	err := os.Symlink(path+defs.Template, defs.Path)
-	if IsNotNil(err) {
-		log.Printf("cannot symlink due an error %v \n", err)
-		return
-	}
-
+func CreateSymlinkFromDef(path string, defs Tool) (err error) {
+	err = os.Symlink(path+defs.Template, defs.Path)
+	return
 }
 
 // RemovesFileIfExists removes a file on the destination path if it exists
-func RemovesFileIfExists(defs Tool) {
+func RemovesFileIfExists(defs Tool) (err error) {
 	if !FileNotExists(defs.Path) {
-		err := os.Remove(defs.Path)
-		if IsNotNil(err) {
-			log.Fatalf(" cannot remove path file due an error %v \n", err)
-		}
+		err = os.Remove(defs.Path)
+	} else {
+		err = errors.New("the file doesn't exist")
+	}
+	return
+}
+
+// FailIfError prints the error base on the text message , it will exit the program
+func FailIfError(text string, err error) {
+	if IsNotNil(err) {
+		log.Fatalf(text, err)
 	}
 }
