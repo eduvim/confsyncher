@@ -11,6 +11,9 @@ Plug 'dense-analysis/ale'
 Plug 'ayu-theme/ayu-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 set t_Co=256
 
@@ -48,7 +51,7 @@ let g:ale_linters= {
   \ 'go': ['gopls', 'golint'] , 
   \}
 
-colorscheme ayu
+colorscheme nord
 
 " Load all plugins now.
 " " Plugins need to be added to runtimepath before helptags can be generated.
