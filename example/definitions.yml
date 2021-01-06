@@ -5,3 +5,6 @@ definitions:
   tmux:
     path: "/home/edu/.tmux.conf"
     template: "tmux.conf.template"
+  vim:
+    path: "/home/edu/.vimrc"
+    template: "vimrc.template"

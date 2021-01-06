@@ -1,0 +1,57 @@
+call plug#begin('~/.config/.vim/plugged')
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'airblade/vim-gitgutter'
+
+Plug 'junegunn/fzf' , {'dir': '~/.fzf' , 'do': './install -all'}
+Plug 'fatih/vim-go', {'do': 'GoInstallBinaries'}
+
+Plug 'Raimondi/delimitMate'
+
+Plug 'preservim/tagbar'
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+" Plug 'whatyouhide/vim-gotham'
+Plug 'NLKNguyen/papercolor-theme'
+
+Plug 'luochen1990/rainbow'
+call plug#end()
+set encoding=UTF-8
+set number
+syntax on
+set t_Co=256
+se cursorline
+filetype plugin on
+
+map <C-n> :NERDTreeToggle<CR>
+
+autocmd FileType go map <C-b> :GoReferrers<CR>
+autocmd FileType go map <C-d> :GoDef<CR>
+autocmd FileType go map <C-q> :GoDefPop<CR>
+autocmd FileType go map <C-r> :GoRename<CR>
+autocmd FileType go set omnifunc=go#complete#Complete
+autocmd FileType go let g:go_fmt_command = "goimports"
+autocmd FileType go let g:go_auto_type_info = 1
+autocmd FileType go let g:go_auto_sameids = 1
+autocmd FileType go let g:go_gpls_enabled = 1
+
+imap <C-c> <C-x><C-o>
+cmap <C-P> <Up>
+cmap <C-N> <Down>
+map  <C-I> :TagbarToogle<CR>
+
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
+
+let g:rainbow_active = 1 
+let NERDTreeShowHidden=1
+
+set expandtab
+set shiftwidth=8
+set softtabstop=8
+
+set background=dark
+colorscheme PaperColor 

@@ -11,12 +11,17 @@ Plug 'dense-analysis/ale'
 Plug 'ayu-theme/ayu-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
+Plug 'lambdalisue/fern.vim'
+Plug 'dyng/ctrlsf.vim'
+
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'arcticicestudio/nord-vim'
+
+
 call plug#end()
 set t_Co=256
-
+completeopt+=popup
 set termguicolors
 set encoding=UTF-8
 set number
