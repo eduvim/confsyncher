@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
@@ -109,4 +110,8 @@ func FailIfError(text string, err error) {
 	if IsNotNil(err) {
 		log.Fatalf(text, err)
 	}
+}
+
+func unused() {
+	fmt.Println("Hello")
 }

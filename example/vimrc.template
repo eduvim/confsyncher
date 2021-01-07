@@ -11,47 +11,85 @@ Plug 'Raimondi/delimitMate'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-" Plug 'whatyouhide/vim-gotham'
-Plug 'NLKNguyen/papercolor-theme'
-
 Plug 'luochen1990/rainbow'
+
+Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
+
+" Plug 'gmoe/vim-espresso'
+" Plug 'junegunn/seoul256.vim'
+Plug 'sainnhe/gruvbox-material'
+
+
+Plug 'sheerun/vim-polyglot'
+
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+
 call plug#end()
 set encoding=UTF-8
+set noshowmode
+set expandtab
+set shiftwidth=8
+set softtabstop=8
 set number
-syntax on
-set t_Co=256
+set hlsearch
+syntax enable
 se cursorline
-filetype plugin on
+set termguicolors
+se t_Co=256
+filetype plugin indent on
 
-map <C-n> :NERDTreeToggle<CR>
 
 autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
 autocmd FileType go map <C-q> :GoDefPop<CR>
 autocmd FileType go map <C-r> :GoRename<CR>
+au filetype go inoremap <buffer> . .<C-x><C-o>
 autocmd FileType go set omnifunc=go#complete#Complete
-autocmd FileType go let g:go_fmt_command = "goimports"
 autocmd FileType go let g:go_auto_type_info = 1
 autocmd FileType go let g:go_auto_sameids = 1
 autocmd FileType go let g:go_gpls_enabled = 1
+autocmd FileType go let g:go_metalinter_autosave = 0
+autocmd FileType go let g:go_fmt_autosave=1
+autocmd FileType go let g:go_fmt_command= 'goimports'
+autocmd FileType go let g:go_metalinter_autosave_enabled = ['bodyclose']
 
-imap <C-c> <C-x><C-o>
-cmap <C-P> <Up>
-cmap <C-N> <Down>
-map  <C-I> :TagbarToogle<CR>
+autocmd FileType go let g:go_doc_popup_window = 1
+autocmd FileType go imap <C-c> <C-x><C-o>
+autocmd FileType go cmap <C-P> <Up>
+autocmd FileType go cmap <C-N> <Down>
 
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-
-let g:rainbow_active = 1 
+nmap <F8> :TagbarToggle<CR>
+noremap <F2> :set hlsearch! hlsearch?<CR>
+map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+let g:rainbow_active = 1 
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠'
 
-set expandtab
-set shiftwidth=8
-set softtabstop=8
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_structs = 1
+let g:go_highlight_types = 1
+let g:airline_powerline_fonts = 1
+let g:ale_linters = { 'go': ['gofmt', 'govet', 'golint'] }
 
+let g:UtilSnipsExpandTrigger="<tab>"
+let g:UtilSnipsJumpForwardTrigger="<c-x>"
+let g:UtilSnipsJumpBackwardTrigger="<c-z>"
+
+let g:UtilSnipsEditSplit="vertical"
+
+set completeopt=longest,menuone,popup,preview
 set background=dark
-colorscheme PaperColor 
+colorscheme gruvbox-material
