@@ -16,8 +16,8 @@ Plug 'luochen1990/rainbow'
 Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Plug 'gmoe/vim-espresso'
-" Plug 'junegunn/seoul256.vim'
-Plug 'NLKNguyen/papercolor-theme'
+" Plug 'NLKNguyen/papercolor-theme'
+Plug 'sainnhe/sonokai'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -26,7 +26,16 @@ Plug 'honza/vim-snippets'
 
 Plug 'dense-analysis/ale'
 Plug 'vim-airline/vim-airline'
+Plug 'Shougo/deoplete.nvim'
+" delete this two when nvim
+Plug 'roxma/nvim-yarp'
+Plug 'roxma/vim-hug-neovim-rpc'
+Plug 'edkolev/tmuxline.vim'
+Plug 'ayu-theme/ayu-vim'
 
+" install ptgrep , it's a golang project !!!
+" go get -u github.com/monochromegane/the_platinum_searcher/...
+Plug 'yegappan/grep'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -35,10 +44,10 @@ set shiftwidth=8
 set softtabstop=8
 set number
 set hlsearch
-syntax enable
 se cursorline
 se t_Co=256
 set termguicolors
+syntax enable
 filetype plugin indent on
 set clipboard=unnamedplus
 
@@ -52,8 +61,8 @@ autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
 autocmd FileType go map <C-q> :GoDefPop<CR>
 autocmd FileType go map <C-r> :GoRename<CR>
-au filetype go inoremap <buffer> . .<C-x><C-o>
-autocmd FileType go set omnifunc=go#complete#Complete
+autocmd filetype go inoremap <buffer> . .<C-x><C-o>
+" autocmd FileType go set omnifunc=go#complete#Complete
 autocmd FileType go let g:go_auto_type_info = 1
 autocmd FileType go let g:go_auto_sameids = 1
 autocmd FileType go let g:go_gpls_enabled = 1
@@ -61,14 +70,12 @@ autocmd FileType go let g:go_metalinter_autosave = 0
 autocmd FileType go let g:go_fmt_autosave=1
 autocmd FileType go let g:go_fmt_command= 'goimports'
 autocmd FileType go let g:go_metalinter_autosave_enabled = ['bodyclose']
-
 autocmd FileType go let g:go_doc_popup_window = 1
-autocmd FileType go imap <C-c> <C-x><C-o>
+autocmd FileType go imap <C-,> <C-x><C-o>
 autocmd FileType go cmap <C-P> <Up>
 autocmd FileType go cmap <C-N> <Down>
 
 autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 nmap <F8> :TagbarToggle<CR>
 noremap <F2> :set hlsearch! hlsearch?<CR>
@@ -87,14 +94,19 @@ let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
 let g:airline_powerline_fonts = 1
+let g:airline_theme = 'sonokai'
+
 let g:ale_linters = { 'go': ['gofmt', 'govet', 'golint'] }
 
 let g:UtilSnipsExpandTrigger="<tab>"
 let g:UtilSnipsJumpForwardTrigger="<c-x>"
 let g:UtilSnipsJumpBackwardTrigger="<c-z>"
-
 let g:UtilSnipsEditSplit="vertical"
 
+let g:deoplete#enable_at_startup = 1
+
+let g:sonokai_style = 'andromeda'
+
 set completeopt=longest,menuone,popup,preview
-set background=dark
-colorscheme PaperColor
+let ayucolor="dark"
+colorscheme ayu

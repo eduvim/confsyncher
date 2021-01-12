@@ -8,3 +8,6 @@ definitions:
   vim:
     path: "/home/edu/.vimrc"
     template: "vimrc.template"
+  alacritty:
+    path: "/home/edu/.config/alacritty/alacritty.yml"
+    template: "alacritty.yml.template"
