@@ -17,8 +17,7 @@ Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
 
 " Plug 'gmoe/vim-espresso'
 " Plug 'junegunn/seoul256.vim'
-Plug 'sainnhe/gruvbox-material'
-
+Plug 'NLKNguyen/papercolor-theme'
 
 Plug 'sheerun/vim-polyglot'
 
@@ -38,10 +37,16 @@ set number
 set hlsearch
 syntax enable
 se cursorline
-set termguicolors
 se t_Co=256
+set termguicolors
 filetype plugin indent on
+set clipboard=unnamedplus
 
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
 
 autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
@@ -92,4 +97,4 @@ let g:UtilSnipsEditSplit="vertical"
 
 set completeopt=longest,menuone,popup,preview
 set background=dark
-colorscheme gruvbox-material
+colorscheme PaperColor

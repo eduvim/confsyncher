@@ -3,18 +3,24 @@ set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'christoomey/vim-tmux-navigator'
 
-set -g @plugin 'mattdavis90/base16-tmux'
+set -g base-index 1
+setw -g pane-base-index 1
+
 # Other examples:
 # set -g @plugin 'github_username/plugin_name'
 # set -g @plugin 'git@github.com:user/plugin'
 # set -g @plugin 'git@bitbucket.com:user/plugin'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+
+set -g @plugin 'jimeh/tmux-themepack'
 
 set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
 
-set -g default-terminal "screen-256color"
-set -g terminal-overrides 'xterm:colors=256'
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ",*256col*:Tc"
 
+set -g @themepack 'powerline/double/orange'
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
 run '~/.tmux/plugins/tpm/tpm'
