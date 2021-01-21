@@ -13,8 +13,6 @@ Plug 'ryanoasis/vim-devicons'
 
 Plug 'luochen1990/rainbow'
 
-Plug 'rrethy/vim-hexokinase', { 'do': 'make hexokinase' }
-
 " Plug 'gmoe/vim-espresso'
 " Plug 'NLKNguyen/papercolor-theme'
 Plug 'sainnhe/sonokai'
@@ -31,24 +29,30 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'edkolev/tmuxline.vim'
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'ayu-theme/ayu-vim'
 
 " install ptgrep , it's a golang project !!!
 " go get -u github.com/monochromegane/the_platinum_searcher/...
 Plug 'yegappan/grep'
+
+Plug 'preservim/nerdcommenter'
+Plug 'chuling/equinusocio-material.vim'
+Plug 'sheerun/vim-polyglot'
+
 call plug#end()
 set encoding=UTF-8
 set noshowmode
 set expandtab
 set shiftwidth=8
 set softtabstop=8
-set number
+set rnu 
 set hlsearch
 se cursorline
 se t_Co=256
 set termguicolors
 syntax enable
-filetype plugin indent on
+filetype plugin on
 set clipboard=unnamedplus
 
 if exists('+termguicolors')
@@ -96,6 +100,9 @@ let g:go_highlight_types = 1
 let g:airline_powerline_fonts = 1
 let g:airline_theme = 'sonokai'
 
+nnoremap <silent> <leader>c} V}:call NERDComment('x', 'toggle')<CR>
+nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR>
+
 let g:ale_linters = { 'go': ['gofmt', 'govet', 'golint'] }
 
 let g:UtilSnipsExpandTrigger="<tab>"
@@ -105,8 +112,8 @@ let g:UtilSnipsEditSplit="vertical"
 
 let g:deoplete#enable_at_startup = 1
 
-let g:sonokai_style = 'andromeda'
-
 set completeopt=longest,menuone,popup,preview
-let ayucolor="dark"
-colorscheme ayu
+" let ayucolor="dark"
+" colorscheme ayu
+let g:equinusocio_material_style = 'default'
+colorscheme equinusocio_material

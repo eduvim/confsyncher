@@ -22,3 +22,17 @@ colors:
     magenta: "0xbb97ee"
     cyan: "0xf89860"
     white: "0xe1e3e4"
+
+font:
+    normal:
+        family: Hack Nerd Font
+        style: Regular
+    bold:
+        family: Hack Nerd Font
+        style: Bold
+    italic:
+        family: Hack Nerd Font 
+        style: Italic
+
+    # Point size of the font
+    size: 12
