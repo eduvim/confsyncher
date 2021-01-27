@@ -1,4 +1,6 @@
+
 call plug#begin('~/.config/.vim/plugged')
+
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
@@ -11,26 +13,19 @@ Plug 'Raimondi/delimitMate'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
+Plug 'itchyny/lightline.vim'
 Plug 'luochen1990/rainbow'
-
-" Plug 'gmoe/vim-espresso'
-" Plug 'NLKNguyen/papercolor-theme'
-Plug 'sainnhe/sonokai'
 
 Plug 'sheerun/vim-polyglot'
 
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-
-Plug 'dense-analysis/ale'
-Plug 'vim-airline/vim-airline'
-Plug 'Shougo/deoplete.nvim'
 " delete this two when nvim
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
-Plug 'edkolev/tmuxline.vim'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'ayu-theme/ayu-vim'
+
+" javascript deoplete support
+Plug 'jelera/vim-javascript-syntax'
+Plug 'mxw/vim-jsx'
+Plug 'elzr/vim-json'
 
 " install ptgrep , it's a golang project !!!
 " go get -u github.com/monochromegane/the_platinum_searcher/...
@@ -40,12 +35,19 @@ Plug 'preservim/nerdcommenter'
 Plug 'chuling/equinusocio-material.vim'
 Plug 'sheerun/vim-polyglot'
 
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-gocode.vim'
+Plug 'dense-analysis/ale'
+Plug 'andreypopp/asyncomplete-ale.vim'
+
+Plug 'lifepillar/vim-solarized8'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
 set expandtab
 set shiftwidth=8
 set softtabstop=8
+set number
 set rnu 
 set hlsearch
 se cursorline
@@ -55,11 +57,33 @@ syntax enable
 filetype plugin on
 set clipboard=unnamedplus
 
+ 
 if exists('+termguicolors')
   let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
 endif
+
+let g:lightline = {
+      \ 'colorscheme': 'solarized',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'readonly', 'filename', 'modified', 'charvaluehex' ] ]
+      \ },
+      \ 'component': {
+      \   'charvaluehex': '0x%B'
+      \ },
+      \ }
+
+call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
+    \ 'name': 'gocode',
+    \ 'allowlist': ['go'],
+    \ 'completor': function('asyncomplete#sources#gocode#completor'),
+    \ 'config': {
+    \    'gocode_path': expand('~/go/bin/gocode')
+    \  },
+    \ 'linter': ['gofmt', 'govet', 'golint'] ,
+    \ }))
 
 autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
@@ -84,11 +108,17 @@ autocmd StdinReadPre * let s:std_in=1
 nmap <F8> :TagbarToggle<CR>
 noremap <F2> :set hlsearch! hlsearch?<CR>
 map <C-n> :NERDTreeToggle<CR>
+inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
+let asyncomplete_auto_popup = 0
 let NERDTreeShowHidden=1
 let g:rainbow_active = 1 
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠'
 
+let g:ale_completion_enabled = 0
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -97,23 +127,13 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:airline_powerline_fonts = 1
-let g:airline_theme = 'sonokai'
-
+let g:solarized_termcolors=256
 nnoremap <silent> <leader>c} V}:call NERDComment('x', 'toggle')<CR>
 nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR>
 
-let g:ale_linters = { 'go': ['gofmt', 'govet', 'golint'] }
+set completeopt=longest,menuone,popup,preview,noselect
 
-let g:UtilSnipsExpandTrigger="<tab>"
-let g:UtilSnipsJumpForwardTrigger="<c-x>"
-let g:UtilSnipsJumpBackwardTrigger="<c-z>"
-let g:UtilSnipsEditSplit="vertical"
-
-let g:deoplete#enable_at_startup = 1
-
-set completeopt=longest,menuone,popup,preview
-" let ayucolor="dark"
-" colorscheme ayu
-let g:equinusocio_material_style = 'default'
-colorscheme equinusocio_material
+" let g:equinusocio_material_style = 'darker'
+" colorscheme equinusocio_material
+set background=dark
+colorscheme solarized8_flat

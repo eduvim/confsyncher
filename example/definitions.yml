@@ -1,13 +1,13 @@
 definitions:
-  nvim:
-    path: "/home/edu/.config/nvim/init.vim"
-    template: "init.vim.template"
+#  nvim:
+#    path: "/home/galaxy-designer/.config/nvim/init.vim"
+#    template: "init.vim.template"
   tmux:
-    path: "/home/edu/.tmux.conf"
+    path: "/home/galaxy-designer/.tmux.conf"
     template: "tmux.conf.template"
   vim:
-    path: "/home/edu/.vimrc"
+    path: "/home/galaxy-designer/.vimrc"
     template: "vimrc.template"
-  alacritty:
-    path: "/home/edu/.config/alacritty/alacritty.yml"
-    template: "alacritty.yml.template"
+#  alacritty:
+#    path: "/home/galaxy-designer/.config/alacritty/alacritty.yml"
+#    template: "alacritty.yml.template"
