@@ -26,21 +26,30 @@ Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
+Plug 'sheerun/vim-polyglot'
 
 " install ptgrep , it's a golang project !!!
 " go get -u github.com/monochromegane/the_platinum_searcher/...
 Plug 'yegappan/grep'
 
 Plug 'preservim/nerdcommenter'
-Plug 'chuling/equinusocio-material.vim'
-Plug 'sheerun/vim-polyglot'
 
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/async.vim'
 Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-gocode.vim'
-Plug 'dense-analysis/ale'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
 Plug 'andreypopp/asyncomplete-ale.vim'
+" Javascript 
+Plug 'runoshun/tscompletejob'
+Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
 
-Plug 'lifepillar/vim-solarized8'
+" Checkers
+Plug 'dense-analysis/ale'
+
+Plug 'jceb/vim-orgmode'
+Plug 'tpope/vim-speeddating'
+
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -57,15 +66,11 @@ syntax enable
 filetype plugin on
 set clipboard=unnamedplus
 
- 
-if exists('+termguicolors')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  set termguicolors
-endif
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:lightline = {
-      \ 'colorscheme': 'solarized',
+      \ 'colorscheme': 'nord',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'readonly', 'filename', 'modified', 'charvaluehex' ] ]
@@ -75,33 +80,41 @@ let g:lightline = {
       \ },
       \ }
 
-call asyncomplete#register_source(asyncomplete#sources#gocode#get_source_options({
-    \ 'name': 'gocode',
-    \ 'allowlist': ['go'],
-    \ 'completor': function('asyncomplete#sources#gocode#completor'),
-    \ 'config': {
-    \    'gocode_path': expand('~/go/bin/gocode')
-    \  },
-    \ 'linter': ['gofmt', 'govet', 'golint'] ,
-    \ }))
+if executable('gopls')
+  au User lsp_setup call lsp#register_server({
+  \ 'name': 'gopls',
+  \ 'cmd': {server_info->['gopls']},
+  \ 'allowlist': ['go'],
+  \ })
+endif
+
+if executable('flow')
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'flow',
+        \ 'cmd': {server_info->['flow', 'lsp', '--from', 'vim-lsp']},
+        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
+        \ 'whitelist': ['javascript', 'javascript.jsx'],
+        \ })
+endif
 
 autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
 autocmd FileType go map <C-q> :GoDefPop<CR>
 autocmd FileType go map <C-r> :GoRename<CR>
-autocmd filetype go inoremap <buffer> . .<C-x><C-o>
 " autocmd FileType go set omnifunc=go#complete#Complete
 autocmd FileType go let g:go_auto_type_info = 1
 autocmd FileType go let g:go_auto_sameids = 1
-autocmd FileType go let g:go_gpls_enabled = 1
+autocmd FileType go let g:go_gpls_enabled = 0
 autocmd FileType go let g:go_metalinter_autosave = 0
 autocmd FileType go let g:go_fmt_autosave=1
 autocmd FileType go let g:go_fmt_command= 'goimports'
 autocmd FileType go let g:go_metalinter_autosave_enabled = ['bodyclose']
 autocmd FileType go let g:go_doc_popup_window = 1
+
 autocmd FileType go imap <C-,> <C-x><C-o>
 autocmd FileType go cmap <C-P> <Up>
 autocmd FileType go cmap <C-N> <Down>
+autocmd FileType go inoremap <buffer> . .<C-x><C-o>
 
 autocmd StdinReadPre * let s:std_in=1
 
@@ -111,6 +124,11 @@ map <C-n> :NERDTreeToggle<CR>
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+
+autocmd FileType js imap <C-,> <C-x><C-o>
+autocmd FileType js cmap <C-P> <Up>
+autocmd FileType js cmap <C-N> <Down>
+autocmd FileType js inoremap <buffer> . .<C-x><C-o>
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let asyncomplete_auto_popup = 0
 let NERDTreeShowHidden=1
@@ -135,5 +153,5 @@ set completeopt=longest,menuone,popup,preview,noselect
 
 " let g:equinusocio_material_style = 'darker'
 " colorscheme equinusocio_material
-set background=dark
-colorscheme solarized8_flat
+
+colorscheme nord
