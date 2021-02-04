@@ -48,14 +48,15 @@ Plug 'dense-analysis/ale'
 
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
-
-Plug 'arcticicestudio/nord-vim'
+Plug 'gmoe/vim-espresso'
+Plug 'zacanger/angr.vim'
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'tpope/vim-fugitive'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
 set expandtab
-set shiftwidth=8
-set softtabstop=8
+set smarttab
 set number
 set rnu 
 set hlsearch
@@ -97,6 +98,8 @@ if executable('flow')
         \ })
 endif
 
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType go setlocal sw=8 ts=8 expandtab
 autocmd FileType go map <C-b> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
 autocmd FileType go map <C-q> :GoDefPop<CR>
@@ -154,4 +157,5 @@ set completeopt=longest,menuone,popup,preview,noselect
 " let g:equinusocio_material_style = 'darker'
 " colorscheme equinusocio_material
 
-colorscheme nord
+set background=dark
+colorscheme angr 
