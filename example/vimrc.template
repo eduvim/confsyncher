@@ -4,6 +4,10 @@ call plug#begin('~/.config/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-fugitive'
+" install ptgrep , it's a golang project !!!
+" go get -u github.com/monochromegane/the_platinum_searcher/...
+Plug 'yegappan/grep'
 
 Plug 'junegunn/fzf' , {'dir': '~/.fzf' , 'do': './install -all'}
 Plug 'fatih/vim-go', {'do': 'GoInstallBinaries'}
@@ -28,10 +32,6 @@ Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
 Plug 'sheerun/vim-polyglot'
 
-" install ptgrep , it's a golang project !!!
-" go get -u github.com/monochromegane/the_platinum_searcher/...
-Plug 'yegappan/grep'
-
 Plug 'preservim/nerdcommenter'
 
 Plug 'prabirshrestha/vim-lsp'
@@ -48,10 +48,11 @@ Plug 'dense-analysis/ale'
 
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
+
 Plug 'gmoe/vim-espresso'
 Plug 'zacanger/angr.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
-Plug 'tpope/vim-fugitive'
+
+Plug 'ghifarit53/tokyonight-vim'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -154,8 +155,8 @@ nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR>
 
 set completeopt=longest,menuone,popup,preview,noselect
 
-" let g:equinusocio_material_style = 'darker'
-" colorscheme equinusocio_material
-
-set background=dark
-colorscheme angr 
+let g:tokyonight_style = 'night' " available: night, storm
+let g:tokyonight_enable_italic = 1
+" set background=dark
+" colorscheme angr 
+colorscheme tokyonight
