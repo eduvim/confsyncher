@@ -17,10 +17,8 @@ Plug 'Raimondi/delimitMate'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'luochen1990/rainbow'
-
-Plug 'sheerun/vim-polyglot'
 
 " delete this two when nvim
 Plug 'roxma/nvim-yarp'
@@ -30,8 +28,8 @@ Plug 'roxma/vim-hug-neovim-rpc'
 Plug 'jelera/vim-javascript-syntax'
 Plug 'mxw/vim-jsx'
 Plug 'elzr/vim-json'
-Plug 'sheerun/vim-polyglot'
 
+Plug 'sheerun/vim-polyglot'
 Plug 'preservim/nerdcommenter'
 
 Plug 'prabirshrestha/vim-lsp'
@@ -49,13 +47,15 @@ Plug 'dense-analysis/ale'
 Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
 
-Plug 'gmoe/vim-espresso'
-Plug 'zacanger/angr.vim'
-
 Plug 'ghifarit53/tokyonight-vim'
+Plug 'flrnprz/plastic.vim'
+
+Plug 'whatyouhide/vim-gotham'
+Plug 'morhetz/gruvbox'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
+set nocompatible
 set expandtab
 set smarttab
 set number
@@ -71,16 +71,12 @@ set clipboard=unnamedplus
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-let g:lightline = {
-      \ 'colorscheme': 'nord',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'readonly', 'filename', 'modified', 'charvaluehex' ] ]
-      \ },
-      \ 'component': {
-      \   'charvaluehex': '0x%B'
-      \ },
-      \ }
+" let g:airline_theme = "gotham"
+let g:airline_theme = "gruvbox"
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#left_sep = ' < '
+let g:airline#extensions#tabline#left_alt_sep = '>'
 
 if executable('gopls')
   au User lsp_setup call lsp#register_server({
@@ -157,6 +153,8 @@ set completeopt=longest,menuone,popup,preview,noselect
 
 let g:tokyonight_style = 'night' " available: night, storm
 let g:tokyonight_enable_italic = 1
-" set background=dark
-" colorscheme angr 
-colorscheme tokyonight
+let g:gruvbox_contrast_dark= 'hard'
+set background=dark
+" colorscheme tokyonight
+" colorscheme gotham
+colorscheme gruvbox

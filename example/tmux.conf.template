@@ -9,14 +9,16 @@ setw -g pane-base-index 1
 # set -g @plugin 'github_username/plugin_name'
 # set -g @plugin 'git@github.com:user/plugin'
 # set -g @plugin 'git@bitbucket.com:user/plugin'
-set -g @plugin 'jimeh/tmux-themepack'
-
+# set -g @plugin 'jimeh/tmux-themepack'
 set-window-option -g mode-keys vi
 bind-key -T copy-mode-vi 'v' send -X begin-selection
 bind-key -T copy-mode-vi 'y' send -X copy-selection-and-cancel
 
 set -g default-terminal "tmux-256color"
 set -ga terminal-overrides ",*256col*:Tc"
+
+set -g @plugin 'egel/tmux-gruvbox'
+set -g @tmux-gruvbox 'dark' # or 'light'
 
 set-option -g default-shell /bin/zsh
 # Initialize TMUX plugin manager (keep this line at the very bottom of tmux.conf)
