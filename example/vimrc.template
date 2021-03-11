@@ -52,6 +52,10 @@ Plug 'flrnprz/plastic.vim'
 
 Plug 'whatyouhide/vim-gotham'
 Plug 'morhetz/gruvbox'
+Plug 'reedes/vim-colors-pencil'
+
+Plug 'knubie/vim-kitty-navigator'
+
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -64,6 +68,9 @@ set hlsearch
 se cursorline
 se t_Co=256
 set termguicolors
+set title
+let &titlestring='%t - nvim'
+
 syntax enable
 filetype plugin on
 set clipboard=unnamedplus
@@ -72,7 +79,7 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 " let g:airline_theme = "gotham"
-let g:airline_theme = "gruvbox"
+let g:airline_theme = "pencil"
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
 let g:airline#extensions#tabline#left_sep = ' < '
@@ -157,4 +164,5 @@ let g:gruvbox_contrast_dark= 'hard'
 set background=dark
 " colorscheme tokyonight
 " colorscheme gotham
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme pencil
