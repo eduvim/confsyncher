@@ -1,65 +1,18 @@
-schemes:
-  # Tokyo Night theme, based on both:
-  #   https://github.com/ghifarit53/tokyonight-vim
-  #   https://github.com/enkia/tokyo-night-vscode-theme
-  tokyo-night:
-    # Default colors
-    &tokyo-night
-    primary:
-      background: '0x1a1b26'
-      foreground: '0xa9b1d6'
+schemes: null
 
-    # Normal colors
-    normal:
-      black: '0x32344a'
-      red: '0xf7768e'
-      green: '0x9ece6a'
-      yellow: '0xe0af68'
-      blue: '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan: '0x449dab'
-      white: '0x787c99'
+font:
+  normal:
+    family: FiraCode Nerd Font
+    style: Regular
+  bold:
+    family: FiraCode Nerd Font
+    style: Bold
+  italic:
+    family: FiraCode Nerd Font
+    style: Italic
 
-    # Bright colors
-    bright:
-      black: '0x444b6a'
-      red: '0xff7a93'
-      green: '0xb9f27c'
-      yellow: '0xff9e64'
-      blue: '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan: '0x0db9d7'
-      white: '0xacb0d0'
-
-  tokyo-night-storm:
-    # Default colors
-    &tokyo-night-storm
-    primary:
-      background: '0x24283b'
-      foreground: '0xa9b1d6'
-
-    # Normal colors
-    normal:
-      black: '0x32344a'
-      red: '0xf7768e'
-      green: '0x9ece6a'
-      yellow: '0xe0af68'
-      blue: '0x7aa2f7'
-      magenta: '0xad8ee6'
-      cyan: '0x449dab'
-      white: '0x9699a8'
-
-    # Bright colors
-    bright:
-      black: '0x444b6a'
-      red: '0xff7a93'
-      green: '0xb9f27c'
-      yellow: '0xff9e64'
-      blue: '0x7da6ff'
-      magenta: '0xbb9af7'
-      cyan: '0x0db9d7'
-      white: '0xacb0d0'
-
+  # Point size of the font
+  size: 12
 colors:
   # Default colors
   primary:
@@ -89,17 +42,3 @@ colors:
     magenta: '#c678dd'
     cyan: '#56b6c2'
     white: '#ffffff'
-# colors: *tokyo-night-storm
-font:
-  normal:
-    family: GoMono Nerd Font
-    style: Regular
-  bold:
-    family: GoMono Nerd Font
-    style: Bold
-  italic:
-    family: GoMono Nerd Font
-    style: Italic
-
-  # Point size of the font
-  size: 12
