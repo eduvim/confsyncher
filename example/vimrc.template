@@ -17,45 +17,20 @@ Plug 'Raimondi/delimitMate'
 Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
-Plug 'vim-airline/vim-airline'
 Plug 'luochen1990/rainbow'
+ Plug 'itchyny/lightline.vim'
 
 " delete this two when nvim
 Plug 'roxma/nvim-yarp'
 Plug 'roxma/vim-hug-neovim-rpc'
 
-" javascript deoplete support
-Plug 'jelera/vim-javascript-syntax'
-Plug 'mxw/vim-jsx'
-Plug 'elzr/vim-json'
-
 Plug 'sheerun/vim-polyglot'
-Plug 'preservim/nerdcommenter'
-
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'andreypopp/asyncomplete-ale.vim'
-" Javascript 
-Plug 'runoshun/tscompletejob'
-Plug 'prabirshrestha/asyncomplete-tscompletejob.vim'
 
 " Checkers
 Plug 'dense-analysis/ale'
 
-Plug 'jceb/vim-orgmode'
 Plug 'tpope/vim-speeddating'
-
-Plug 'ghifarit53/tokyonight-vim'
-Plug 'flrnprz/plastic.vim'
-
-Plug 'whatyouhide/vim-gotham'
-Plug 'morhetz/gruvbox'
-Plug 'reedes/vim-colors-pencil'
-
-Plug 'knubie/vim-kitty-navigator'
-
+Plug 'kjssad/quantum.vim'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -72,47 +47,27 @@ set title
 let &titlestring='%t - nvim'
 
 syntax enable
-filetype plugin on
+filetype plugin indent on
 set clipboard=unnamedplus
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-" let g:airline_theme = "gotham"
-let g:airline_theme = "pencil"
-let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
-let g:airline#extensions#tabline#left_sep = ' < '
-let g:airline#extensions#tabline#left_alt_sep = '>'
-
-if executable('gopls')
-  au User lsp_setup call lsp#register_server({
-  \ 'name': 'gopls',
-  \ 'cmd': {server_info->['gopls']},
-  \ 'allowlist': ['go'],
-  \ })
-endif
-
-if executable('flow')
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'flow',
-        \ 'cmd': {server_info->['flow', 'lsp', '--from', 'vim-lsp']},
-        \ 'root_uri':{server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), '.flowconfig'))},
-        \ 'whitelist': ['javascript', 'javascript.jsx'],
-        \ })
-endif
+let g:lightline = {
+      \ 'colorscheme': 'quantum'
+      \}
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType go setlocal sw=8 ts=8 expandtab
-autocmd FileType go map <C-b> :GoReferrers<CR>
+autocmd FileType go map <C-r> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
-autocmd FileType go map <C-q> :GoDefPop<CR>
-autocmd FileType go map <C-r> :GoRename<CR>
-" autocmd FileType go set omnifunc=go#complete#Complete
+autocmd FileType go map <C-t> :GoDefPop<CR>
+autocmd FileType go map <C-m> :GoRename<CR>
+autocmd FileType go set omnifunc=go#complete#Complete
 autocmd FileType go let g:go_auto_type_info = 1
 autocmd FileType go let g:go_auto_sameids = 1
-autocmd FileType go let g:go_gpls_enabled = 0
-autocmd FileType go let g:go_metalinter_autosave = 0
+autocmd FileType go let g:go_gpls_enabled = 1
+autocmd FileType go let g:go_metalinter_autosave = 1
 autocmd FileType go let g:go_fmt_autosave=1
 autocmd FileType go let g:go_fmt_command= 'goimports'
 autocmd FileType go let g:go_metalinter_autosave_enabled = ['bodyclose']
@@ -128,14 +83,7 @@ autocmd StdinReadPre * let s:std_in=1
 nmap <F8> :TagbarToggle<CR>
 noremap <F2> :set hlsearch! hlsearch?<CR>
 map <C-n> :NERDTreeToggle<CR>
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
 
-autocmd FileType js imap <C-,> <C-x><C-o>
-autocmd FileType js cmap <C-P> <Up>
-autocmd FileType js cmap <C-N> <Down>
-autocmd FileType js inoremap <buffer> . .<C-x><C-o>
 autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let asyncomplete_auto_popup = 0
 let NERDTreeShowHidden=1
@@ -152,17 +100,10 @@ let g:go_highlight_methods = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_types = 1
-let g:solarized_termcolors=256
 nnoremap <silent> <leader>c} V}:call NERDComment('x', 'toggle')<CR>
 nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR>
 
 set completeopt=longest,menuone,popup,preview,noselect
 
-let g:tokyonight_style = 'night' " available: night, storm
-let g:tokyonight_enable_italic = 1
-let g:gruvbox_contrast_dark= 'hard'
-set background=dark
-" colorscheme tokyonight
-" colorscheme gotham
-" colorscheme gruvbox
-colorscheme pencil
+set background=light
+colorscheme quantum
