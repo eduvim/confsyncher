@@ -18,7 +18,8 @@ Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'luochen1990/rainbow'
- Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
+" Plug 'itchyny/lightline.vim'
 
 " delete this two when nvim
 Plug 'roxma/nvim-yarp'
@@ -31,6 +32,8 @@ Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-speeddating'
 Plug 'kjssad/quantum.vim'
+Plug 'w0ng/vim-hybrid'
+Plug 'franbach/miramare'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -54,7 +57,6 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:lightline = {
-      \ 'colorscheme': 'quantum'
       \}
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
@@ -88,10 +90,8 @@ autocmd! CompleteDone * if pumvisible() == 0 | pclose | endif
 let asyncomplete_auto_popup = 0
 let NERDTreeShowHidden=1
 let g:rainbow_active = 1 
-let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠'
 
-let g:ale_completion_enabled = 0
+let g:airline_theme = 'miramare'
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -105,5 +105,7 @@ nnoremap <silent> <leader>c{ V{:call NERDComment('x', 'toggle')<CR>
 
 set completeopt=longest,menuone,popup,preview,noselect
 
-set background=light
-colorscheme quantum
+" set background=light
+" colorscheme quantum
+set background=dark
+colorscheme hybrid

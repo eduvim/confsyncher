@@ -2,13 +2,13 @@ schemes: null
 
 font:
   normal:
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     style: Regular
   bold:
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     style: Bold
   italic:
-    family: FiraCode Nerd Font
+    family: FiraCode Nerd Font Mono
     style: Italic
 
   # Point size of the font
@@ -16,29 +16,27 @@ font:
 colors:
   # Default colors
   primary:
-    foreground: '#282c34'
-    background: '#ffffff'
+    background: '#27292c'
+    foreground: '#d0d2d1'
 
   # Normal colors
   normal:
-    # NOTE: Use '#131613' for the `black` color if you'd like to see
-    # black text on the background.
-    black: '#282c34'
-    red: '#e06c75'
-    green: '#98c379'
-    yellow: '#d19a66'
-    blue: '#61afef'
-    magenta: '#c678dd'
-    cyan: '#56b6c2'
-    white: '#abb2bf'
+    black: '#35383b'
+    red: '#b05655'
+    green: '#769972'
+    yellow: '#e1a574'
+    blue: '#7693ac'
+    magenta: '#977ba0'
+    cyan: '#749e99'
+    white: '#848b92'
 
   # Bright colors
   bright:
-    black: '#5c6370'
-    red: '#e06c75'
-    green: '#98c379'
-    yellow: '#d19a66'
-    blue: '#61afef'
-    magenta: '#c678dd'
-    cyan: '#56b6c2'
-    white: '#ffffff'
+    black: '#484c52'
+    red: '#d27c7b'
+    green: '#dffebe'
+    yellow: '#f0d189'
+    blue: '#96b1c9'
+    magenta: '#bfa5c7'
+    cyan: '#9fc9c3'
+    white: '#fcf7e2'
