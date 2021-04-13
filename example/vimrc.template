@@ -31,9 +31,10 @@ Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-speeddating'
+
 Plug 'kjssad/quantum.vim'
-Plug 'w0ng/vim-hybrid'
-Plug 'franbach/miramare'
+Plug 'sainnhe/everforest'
+
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -64,7 +65,7 @@ autocmd FileType go setlocal sw=8 ts=8 expandtab
 autocmd FileType go map <C-r> :GoReferrers<CR>
 autocmd FileType go map <C-d> :GoDef<CR>
 autocmd FileType go map <C-t> :GoDefPop<CR>
-autocmd FileType go map <C-m> :GoRename<CR>
+autocmd FileType go map <C-x> :GoRename<CR>
 autocmd FileType go set omnifunc=go#complete#Complete
 autocmd FileType go let g:go_auto_type_info = 1
 autocmd FileType go let g:go_auto_sameids = 1
@@ -91,7 +92,6 @@ let asyncomplete_auto_popup = 0
 let NERDTreeShowHidden=1
 let g:rainbow_active = 1 
 
-let g:airline_theme = 'miramare'
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_highlight_fields = 1
@@ -108,4 +108,4 @@ set completeopt=longest,menuone,popup,preview,noselect
 " set background=light
 " colorscheme quantum
 set background=dark
-colorscheme hybrid
+colorscheme everforest 
