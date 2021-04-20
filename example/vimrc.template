@@ -33,8 +33,7 @@ Plug 'dense-analysis/ale'
 Plug 'tpope/vim-speeddating'
 
 Plug 'kjssad/quantum.vim'
-Plug 'sainnhe/everforest'
-
+Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -108,4 +107,4 @@ set completeopt=longest,menuone,popup,preview,noselect
 " set background=light
 " colorscheme quantum
 set background=dark
-colorscheme everforest 
+colorscheme challenger_deep
