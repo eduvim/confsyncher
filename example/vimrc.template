@@ -4,6 +4,8 @@ call plug#begin('~/.config/.vim/plugged')
 Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
+Plug 'itchyny/vim-gitbranch'
 Plug 'tpope/vim-fugitive'
 " install ptgrep , it's a golang project !!!
 " go get -u github.com/monochromegane/the_platinum_searcher/...
@@ -18,8 +20,7 @@ Plug 'preservim/tagbar'
 Plug 'ryanoasis/vim-devicons'
 
 Plug 'luochen1990/rainbow'
-Plug 'vim-airline/vim-airline'
-" Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 " delete this two when nvim
 Plug 'roxma/nvim-yarp'
@@ -31,9 +32,7 @@ Plug 'sheerun/vim-polyglot'
 Plug 'dense-analysis/ale'
 
 Plug 'tpope/vim-speeddating'
-
-Plug 'kjssad/quantum.vim'
-Plug 'challenger-deep-theme/vim', { 'as': 'challenger-deep' }
+Plug 'ayu-theme/ayu-vim'
 call plug#end()
 set encoding=UTF-8
 set noshowmode
@@ -51,13 +50,22 @@ let &titlestring='%t - nvim'
 
 syntax enable
 filetype plugin indent on
+set updatetime=100
 set clipboard=unnamedplus
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:lightline = {
-      \}
+      \ 'colorscheme': 'ayu',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 autocmd FileType javascript setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType go setlocal sw=8 ts=8 expandtab
@@ -107,4 +115,5 @@ set completeopt=longest,menuone,popup,preview,noselect
 " set background=light
 " colorscheme quantum
 set background=dark
-colorscheme challenger_deep
+let ayucolor="mirage"
+colorscheme ayu
